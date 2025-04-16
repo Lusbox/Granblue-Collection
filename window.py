@@ -18,7 +18,7 @@ root.rowconfigure(0, weight=1)
 
 
 label = ttk.Label(frm, text="Item Name :", style="TLabel")
-photo_vyrn = ImageTk.PhotoImage(Image.open("assets/325px-Vyrn_Anime.webp"))
+photo_vyrn = ImageTk.PhotoImage(Image.open("assets/Vyrn.webp"))
 vyrn = ttk.Label(frm, image=photo_vyrn)
 
 lyria_image = Image.open("assets/lyria_reading.webp")
