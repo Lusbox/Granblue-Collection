@@ -1,8 +1,7 @@
-from tkinter import *
-from tkinter import ttk
+import tkinter as tk
 from PIL import Image, ImageTk
 
-root = Tk()
+root = tk.Tk()
 root.title("Granblue Fantasy Search")
 root.configure(background="black")
 root.geometry("720x480")
@@ -10,32 +9,33 @@ root.resizable(width=False, height=False)
 root.minsize(720, 480)
 root.maxsize(720, 480)
 
-style = ttk.Style()
-style.configure("TFrame", background="black")
-style.configure("TLabel", background="black", foreground="white")
-style.configure("TEntry", fieldbackground="white", foreground="black")
 
-frm = ttk.Frame(root, style="TFrame")
-frm.grid(column=0, row=0, sticky=(N, W, E, S))
+frm = tk.Frame(root, bg="black")
+frm.grid(column=0, row=0, sticky="nsew")
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
+
+
 
 def homescreen():
     for widget in frm.winfo_children():
         widget.destroy()
 
-    label = ttk.Label(frm, text="Item Name :", style="TLabel")
+    label = tk.Label(frm, text="Item Name :",
+                     font=("Arial", 14),
+                     fg="white",
+                     bg="black")
 
     vyrn_img = ImageTk.PhotoImage(Image.open("assets/Vyrn.webp"))
-    vyrn = ttk.Label(frm, image=vyrn_img)
+    vyrn = tk.Label(frm, image=vyrn_img, bg="black")
     
     lyria_image = Image.open("assets/lyria_reading.webp")
     lyria_image = lyria_image.crop((70, 0, lyria_image.width-70, lyria_image.height))
     photo_lyria = ImageTk.PhotoImage(lyria_image)
-    lyria = ttk.Label(frm, image=photo_lyria)
+    lyria = tk.Label(frm, image=photo_lyria, bg="black")
 
-    search_term = StringVar()
-    search_box = ttk.Entry(frm, textvariable=search_term)
+    search_term = tk.StringVar()
+    search_box = tk.Entry(frm, textvariable=search_term)
 
     label.grid(column=0, row=0, padx=5, pady=5)
     search_box.grid(column=0, row=0, columnspan=2, padx=5, pady=5)
@@ -49,17 +49,20 @@ def homescreen():
         for widget in frm.winfo_children():
             widget.destroy()
 
-        result = ttk.Label(frm, text=f"Number of {search_term.get()} in inventory : 4")
+        result = tk.Label(frm, text=f"Number of {search_term.get()} in inventory : 4",
+                        font=("Arial", 14),
+                        fg="white",
+                        bg="black")
 
         weapon_image = Image.open("assets/Weapon_b_1040906400.png")
         weapon_image = weapon_image.resize((weapon_image.width//2, weapon_image.height//2))
         weapon_photo = ImageTk.PhotoImage(weapon_image)
-        weapon = ttk.Label(frm, image=(weapon_photo))
+        weapon = tk.Label(frm, image=weapon_photo, bg="black")
 
         lyria_result = ImageTk.PhotoImage(Image.open("assets/lyria_heat.png"))
-        lyria = ttk.Label(frm, image=lyria_result)
+        lyria = tk.Label(frm, image=lyria_result, bg="black")
 
-        back_button = ttk.Button(frm, text="Back", command=homescreen)
+        back_button = tk.Button(frm, text="Back", command=homescreen)
 
         frm.weapon = weapon_photo
         frm.lyria = lyria_result
