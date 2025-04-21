@@ -2,23 +2,43 @@ import tkinter as tk
 from PIL import Image, ImageTk
 from test_inventory import *
 
+
 root = tk.Tk()
 root.title("Granblue Fantasy Search")
 root.configure(background="black")
 root.geometry("720x480")
 root.resizable(width=False, height=False)
-root.minsize(720, 480)
-root.maxsize(720, 480)
-
 
 frm = tk.Frame(root, bg="black")
 frm.grid(column=0, row=0, sticky="nsew")
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
-
-
 def homescreen():
+    for widget in frm.winfo_children():
+        widget.destroy()
+    
+
+    kumbhi_image = Image.open("assets/Kumbhira_my_love.png")
+    kumbhi_image = kumbhi_image.crop((70, 90, kumbhi_image.width-50, kumbhi_image.height-50))
+    photo_kumbhi = ImageTk.PhotoImage(kumbhi_image)
+    kumbhi = tk.Label(frm, image=photo_kumbhi, bg="black")
+    kumbhi.place(relx=0.1, rely=0)
+    frm.kumbhi_photo = photo_kumbhi
+
+    chars = tk.Button(frm, text="Characters", command=False, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
+    chars.place(relx=0.15, rely=0.3, anchor='center')
+
+    weapons = tk.Button(frm, text="Weapons", command=False, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
+    weapons.place(relx=0.15, rely=0.38, anchor='center')
+
+    summons = tk.Button(frm, text="Summons", command=False, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
+    summons.place(relx=0.15, rely=0.46, anchor='center')
+
+    search = tk.Button(frm, text="Search Inventory", command=search_menu, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
+    search.place(relx=0.15, rely=0.54, anchor='center')
+
+def search_menu():
     for widget in frm.winfo_children():
         widget.destroy()
 
@@ -31,20 +51,25 @@ def homescreen():
     vyrn = tk.Label(frm, image=vyrn_img, bg="black")
     
     lyria_image = Image.open("assets/lyria_reading.webp")
-    lyria_image = lyria_image.crop((70, 0, lyria_image.width-70, lyria_image.height))
+    lyria_image = lyria_image.crop((70, 0, lyria_image.width-70, lyria_image.height-20))
     photo_lyria = ImageTk.PhotoImage(lyria_image)
     lyria = tk.Label(frm, image=photo_lyria, bg="black")
 
     search_term = tk.StringVar()
     search_box = tk.Entry(frm, textvariable=search_term)
 
-    label.grid(column=0, row=0, padx=5, pady=5)
-    search_box.grid(column=0, row=0, columnspan=2, padx=5, pady=5)
-    vyrn.grid(column=1, row=1, padx=5, pady=5)
-    lyria.grid(column=0, row=1, padx=5, pady=5)
+    label.place(relx=0.2, y=20)
+    search_box.place(relx=0.4, y=20)
+    vyrn.place(x=525, rely=0.5, anchor='center')
+    lyria.place(x=200, rely=0.5, anchor='center')
 
     frm.vyrn_photo = vyrn_img
     frm.lyria_photo = photo_lyria
+
+    back_button = tk.Button(frm, text="Back", command=homescreen, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
+    back_button.place(relx=0.5, rely=0.9, anchor='center')
+
+    
 
     def search_results():
         for widget in frm.winfo_children():
@@ -82,7 +107,7 @@ def homescreen():
 
         else:
             siero_pic = Image.open("assets/Sierokarte_NPC.webp")
-            result_pic = siero_pic.resize((int(siero_pic.width//1.75), int(siero_pic.height//1.75)))
+            result_pic = siero_pic.resize((int(siero_pic.width//1.2), int(siero_pic.height//1.2)))
             siero_result = ImageTk.PhotoImage(result_pic)
             siero = tk.Label(frm, image=siero_result, bg="black")
             siero.place(relx=0.5, rely=0.5, anchor='center')
@@ -95,8 +120,10 @@ def homescreen():
                         fg="white",
                         bg="black")
         
-        back_button = tk.Button(frm, text="Back", command=homescreen)
-        back_button.place(relx=0.5, y=420, anchor='center')
+        back_button = tk.Button(frm, text="Back", command=search_menu, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
+        back_button.place(relx=0.57, rely=0.9, anchor='center')
+        home_buttom = tk.Button(frm, text="Home", command=homescreen, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
+        home_buttom.place(relx=0.42, rely=0.9, anchor='center')
         result.place(relx=0.5, y= 50, anchor='center')
 
 
@@ -106,6 +133,8 @@ def homescreen():
         search_results()
 
     search_box.bind('<Return>', on_entry)
+
+
 
 homescreen()
 root.mainloop()
