@@ -7,7 +7,7 @@ root = tk.Tk()
 root.title("Granblue Fantasy Search")
 root.configure(background="black")
 root.geometry("720x480")
-root.resizable(width=False, height=False)
+root.resizable(False, False)
 
 frm = tk.Frame(root, bg="black")
 frm.grid(column=0, row=0, sticky="nsew")
@@ -42,10 +42,7 @@ def search_menu():
     for widget in frm.winfo_children():
         widget.destroy()
 
-    label = tk.Label(frm, text="Item Name :",
-                     font=("Arial", 14),
-                     fg="white",
-                     bg="black")
+    
 
     vyrn_img = ImageTk.PhotoImage(Image.open("assets/Vyrn.webp"))
     vyrn = tk.Label(frm, image=vyrn_img, bg="black")
@@ -55,13 +52,20 @@ def search_menu():
     photo_lyria = ImageTk.PhotoImage(lyria_image)
     lyria = tk.Label(frm, image=photo_lyria, bg="black")
 
+    
+    vyrn.place(relx=0.73, rely=0.5, anchor='center')
+    lyria.place(relx=0.27, rely=0.5, anchor='center')
+
+    label = tk.Label(frm, text="Item Name :",
+                     font=("Arial", 14),
+                     fg="white",
+                     bg="black")
+    
     search_term = tk.StringVar()
     search_box = tk.Entry(frm, textvariable=search_term)
 
-    label.place(relx=0.2, y=20)
-    search_box.place(relx=0.4, y=20)
-    vyrn.place(x=525, rely=0.5, anchor='center')
-    lyria.place(x=200, rely=0.5, anchor='center')
+    label.place(relx=0.35, rely=0.1, anchor='center')
+    search_box.place(relx=0.57, rely=0.1, anchor='center')
 
     frm.vyrn_photo = vyrn_img
     frm.lyria_photo = photo_lyria
@@ -78,32 +82,28 @@ def search_menu():
         weapon_count = 0
         weapon = search_term.get().lower()
         weapon_pic = ""
-        result_pic = ""
         
-
         for item in gbf_invent:
             if item["name"] == weapon:
                 weapon_count += 1
                 weapon_pic = item["image"]
-                lyria = Image.open("assets/lyria_jump.png")
-                result_pic = lyria.resize((lyria.width//2, lyria.height//2))
-
-            
+                
         if weapon_pic:
             weapon_image = Image.open(weapon_pic)
-            weapon_image = weapon_image.resize((weapon_image.width//2, weapon_image.height//2))
+            weapon_image = weapon_image.resize((int(weapon_image.width//1.75), int(weapon_image.height//1.75)))
             weapon_photo = ImageTk.PhotoImage(weapon_image)
             weapon = tk.Label(frm, image=weapon_photo, bg="black")
 
-            lyria_result = ImageTk.PhotoImage(result_pic)
+            lyria = Image.open("assets/lyria_jump.png")
+            lyria = lyria.resize((int(lyria.width//1.75), int(lyria.height//1.75)))
+            lyria_result = ImageTk.PhotoImage(lyria)
             lyria = tk.Label(frm, image=lyria_result, bg="black")
 
             frm.weapon = weapon_photo
             frm.lyria = lyria_result
 
-            
-            weapon.place(x=50, rely=0.5, anchor='w')
-            lyria.place(x=670, rely=0.5, anchor='e')
+            weapon.place(relx=0.3, rely=0.5, anchor='center')
+            lyria.place(relx=0.7, rely=0.5, anchor='center')
 
         else:
             siero_pic = Image.open("assets/Sierokarte_NPC.webp")
@@ -124,7 +124,7 @@ def search_menu():
         back_button.place(relx=0.57, rely=0.9, anchor='center')
         home_buttom = tk.Button(frm, text="Home", command=homescreen, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
         home_buttom.place(relx=0.42, rely=0.9, anchor='center')
-        result.place(relx=0.5, y= 50, anchor='center')
+        result.place(relx=0.5, rely=0.1, anchor='center')
 
 
     
