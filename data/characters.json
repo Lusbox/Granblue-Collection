@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Abby",
+    "image": "assets/characters/Abby.png",
+    "element": "fire",
+    "rarity": "SSR",
+    "obtained": false
+  },
+  {
+    "name": "Agielba",
+    "image": "assets/characters/Agielba.png",
+    "element": "fire",
+    "rarity": "SSR",
+    "obtained": false
+  },
+  {
+    "name": "Aglovale",
+    "image": "assets/characters/Aglovale.png",
+    "element": "water",
+    "rarity": "SSR",
+    "obtained": false
+  }
+]
