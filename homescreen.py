@@ -3,18 +3,15 @@ import json
 from PIL import Image, ImageTk, ImageOps
 from enum import Enum
 
-
 root = tk.Tk()
 root.title("Granblue Fantasy Collection")
 root.configure(background="black")
 root.geometry("720x480")
 root.resizable(False, False)
-
 frm = tk.Frame(root, bg="black")
 frm.grid(column=0, row=0, sticky="nsew")
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
-
 
 with open('data/characters.json', 'r') as file:
     characters = json.load(file)
@@ -274,6 +271,8 @@ def show_char_detail(character):
     screen_utils.back_button(owned_chars)
     screen_utils.home_button()
 
-    
-homescreen()
-root.mainloop()
+
+
+if __name__ == "__main__":
+    homescreen()
+    root.mainloop()
