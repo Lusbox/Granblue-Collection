@@ -4,20 +4,23 @@
     "image": "assets/characters/Abby.png",
     "element": "fire",
     "rarity": "SSR",
-    "obtained": false
+    "big_pic": "assets/characters/Abby_pic.png",
+    "obtained": true
   },
   {
     "name": "Agielba",
     "image": "assets/characters/Agielba.png",
     "element": "fire",
     "rarity": "SSR",
-    "obtained": false
+    "big_pic": "assets/characters/Agielba_pic.png",
+    "obtained": true
   },
   {
     "name": "Aglovale",
     "image": "assets/characters/Aglovale.png",
     "element": "water",
     "rarity": "SSR",
-    "obtained": false
+    "big_pic": "assets/characters/Aglovale_pic.png",
+    "obtained": true
   }
 ]
