@@ -15,15 +15,34 @@ frm.grid(column=0, row=0, sticky="nsew")
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
+
 with open('data/characters.json', 'r') as file:
     characters = json.load(file)
 
 with open('data/weapons.json', 'r') as file:
     weapons = json.load(file)
 
+class ScreenUtils:
+    def __init__(self, frame):
+        self.frame = frame
+    
+    def clear(self):
+        for widget in self.frame.winfo_children():
+            widget.destroy()
+
+    def back_button(self, callback):
+         back_button = tk.Button(self.frame, text="Back", command=callback, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
+         back_button.place(relx=0.57, rely=0.9, anchor='center')
+
+    def home_button(self):
+        home_buttom = tk.Button(self.frame, text="Home", command=homescreen, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
+        home_buttom.place(relx=0.42, rely=0.9, anchor='center')
+  
+screen_utils = ScreenUtils(frm)
+
+
 def homescreen():
-    for widget in frm.winfo_children():
-        widget.destroy()
+    screen_utils.clear()
     
     kumbhi_image = Image.open("assets/misc/Kumbhira_my_love.png")
     kumbhi_image = kumbhi_image.crop((70, 90, kumbhi_image.width-50, kumbhi_image.height-50))
@@ -42,17 +61,15 @@ def homescreen():
     search.place(relx=0.15, rely=0.62, anchor='center')
 
 def owned_chars():
-    for widget in frm.winfo_children():
-        widget.destroy()
+    screen_utils.clear()
     
     char_title = tk.Label(frm, text="Character List", font=("Arial", 14), fg="white", bg="black")
     char_title.place(relx=0.5, rely=0.05, anchor='center')
 
-    back_button = tk.Button(frm, text="Back", command=homescreen, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
-    back_button.place(relx=0.5, rely=0.9, anchor='center')
-
     char_frame = tk.Frame(frm, bg="black")
     char_frame.place(relx=0.05, rely=0.2)
+
+    screen_utils.back_button(homescreen)
 
     frm.photo_references = []
     frm.char_labels = {}
@@ -77,18 +94,16 @@ def owned_chars():
        
 
 def add_item():
-    for widget in frm.winfo_children():
-        widget.destroy()
-
+    screen_utils.clear()
+    
     add_title = tk.Label(frm, text="Manage Characters", font=("Arial", 14), fg="white", bg="black")
     add_title.place(relx=0.5, rely=0.05, anchor='center')
 
-    back_button = tk.Button(frm, text="Back", command=homescreen, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
-    back_button.place(relx=0.5, rely=0.9, anchor='center')
-
     char_frame = tk.Frame(frm, bg="black")
     char_frame.place(relx=0.05, rely=0.2)
-    
+
+    screen_utils.back_button(homescreen)
+
     frm.photo_references = []
     frm.char_labels = {}
 
@@ -121,9 +136,8 @@ def add_item():
 
 
 def search_menu():
-    for widget in frm.winfo_children():
-        widget.destroy()
-
+    screen_utils.clear()
+    
     vyrn_img = ImageTk.PhotoImage(Image.open("assets/misc/Vyrn.webp"))
     vyrn = tk.Label(frm, image=vyrn_img, bg="black")
     
@@ -134,6 +148,8 @@ def search_menu():
    
     vyrn.place(relx=0.73, rely=0.5, anchor='center')
     lyria.place(relx=0.27, rely=0.5, anchor='center')
+
+    screen_utils.back_button(homescreen)
 
     label = tk.Label(frm, text="Character Name :", font=("Arial", 14), fg="white", bg="black")
     
@@ -146,13 +162,9 @@ def search_menu():
     frm.vyrn_photo = vyrn_img
     frm.lyria_photo = photo_lyria
 
-    back_button = tk.Button(frm, text="Back", command=homescreen, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
-    back_button.place(relx=0.5, rely=0.9, anchor='center')
-
     def search_results():
-        for widget in frm.winfo_children():
-            widget.destroy()
-
+        screen_utils.clear()
+        
         search = search_term.get()
         search_pic = ""
         
@@ -177,11 +189,10 @@ def search_menu():
             siero.place(relx=0.5, rely=0.5, anchor='center')
 
             frm.siero = siero_result
-    
-        back_button = tk.Button(frm, text="Back", command=search_menu, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
-        back_button.place(relx=0.57, rely=0.9, anchor='center')
-        home_buttom = tk.Button(frm, text="Home", command=homescreen, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
-        home_buttom.place(relx=0.42, rely=0.9, anchor='center')
+
+        screen_utils.back_button(search_menu)
+        screen_utils.home_button()
+        
  
     def on_entry(event):
         search_results()
@@ -220,7 +231,6 @@ def filter_ele():
                     else:
                         char["label"].grid_remove()
 
-        
     def reset_search():
         fire_var.set('')
         water_var.set('')
@@ -229,7 +239,6 @@ def filter_ele():
         light_var.set('')
         dark_var.set('')
         filter_by_element()
-
 
     fire = tk.Checkbutton(frm, text="Fire", command=filter_by_element, width=4, variable=fire_var, onvalue='fire', offvalue='')
     water = tk.Checkbutton(frm, text="Water", command=filter_by_element, width=4, variable=water_var, onvalue='water', offvalue='')
@@ -250,9 +259,8 @@ def filter_ele():
 
 
 def show_char_detail(character):
-    for widget in frm.winfo_children():
-          widget.destroy()
-
+    screen_utils.clear()
+    
     big_pic = character["big_pic"]
     char_image = Image.open(big_pic)
     char_image = char_image.resize((int(char_image.width//1.75), int(char_image.height//1.75)))
@@ -263,12 +271,8 @@ def show_char_detail(character):
 
     char_pic.place(relx=0.5, rely=0.5, anchor='center')
 
-    back_button = tk.Button(frm, text="Back", command=owned_chars, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
-    back_button.place(relx=0.57, rely=0.9, anchor='center')
-
-    home_buttom = tk.Button(frm, text="Home", command=homescreen, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
-    home_buttom.place(relx=0.42, rely=0.9, anchor='center')
-
+    screen_utils.back_button(owned_chars)
+    screen_utils.home_button()
 
     
 homescreen()

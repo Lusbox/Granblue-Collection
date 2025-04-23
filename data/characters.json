@@ -5,7 +5,7 @@
     "element": "fire",
     "rarity": "SSR",
     "big_pic": "assets/characters/Abby_pic.png",
-    "obtained": true
+    "obtained": false
   },
   {
     "name": "Agielba",
@@ -13,7 +13,7 @@
     "element": "fire",
     "rarity": "SSR",
     "big_pic": "assets/characters/Agielba_pic.png",
-    "obtained": true
+    "obtained": false
   },
   {
     "name": "Aglovale",
@@ -21,6 +21,6 @@
     "element": "water",
     "rarity": "SSR",
     "big_pic": "assets/characters/Aglovale_pic.png",
-    "obtained": true
+    "obtained": false
   }
 ]
