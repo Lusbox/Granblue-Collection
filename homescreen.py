@@ -22,7 +22,15 @@ class ScreenUtils:
     
     def clear(self):
         for widget in self.frame.winfo_children():
-            widget.destroy()
+            try:
+                widget.grid_forget()
+            except tk.TclError:
+                 pass
+            try:
+                 widget.place_forget()
+            except tk.TclError:
+                 pass
+            
 
     def back_button(self, callback):
          back_button = tk.Button(self.frame, text="Back", command=callback, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
@@ -39,25 +47,28 @@ class ScreenUtils:
   
 screen_utils = ScreenUtils(frm)
 
+def initialize_widgets(frm):
+    if not hasattr(frm, 'widgets_initialized') or not frm.widgets_initialized:
+        frm.widgets_initialized = True
+        kumbhi_image = Image.open("assets/misc/Kumbhira_my_love.png")
+        photo_kumbhi = ImageTk.PhotoImage(kumbhi_image)
+
+        frm.kumbhi = tk.Label(frm, image=photo_kumbhi, bg="grey8")
+        frm.kumbhi_photo = photo_kumbhi
+        frm.chars = tk.Button(frm, text="Characters", command=owned_chars, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
+        frm.add = tk.Button(frm, text="Manage", command=add_item, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
+        frm.search = tk.Button(frm, text="Search Chars", command=search_menu, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
+
 
 def homescreen():
     screen_utils.clear()
+    initialize_widgets(frm)
+
+    frm.kumbhi.place(relx=0.15, rely=0)
+    frm.chars.place(relx=0.15, rely=0.3, anchor='center')
+    frm.add.place(relx=0.15, rely=0.54, anchor='center')
+    frm.search.place(relx=0.15, rely=0.62, anchor='center')
     
-    kumbhi_image = Image.open("assets/misc/Kumbhira_my_love.png")
-    photo_kumbhi = ImageTk.PhotoImage(kumbhi_image)
-    kumbhi = tk.Label(frm, image=photo_kumbhi, bg="grey8")
-    kumbhi.place(relx=0.15, rely=0)
-    frm.kumbhi_photo = photo_kumbhi
-
-    chars = tk.Button(frm, text="Characters", command=owned_chars, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
-    chars.place(relx=0.15, rely=0.3, anchor='center')
-
-    add = tk.Button(frm, text="Manage", command=add_item, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
-    add.place(relx=0.15, rely=0.54, anchor='center')
-
-    search = tk.Button(frm, text="Search Chars", command=search_menu, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
-    search.place(relx=0.15, rely=0.62, anchor='center')
-
 
 def owned_chars():
     screen_utils.clear()
