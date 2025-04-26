@@ -57,7 +57,7 @@ def initialize_widgets(frm):
         frm.kumbhi = tk.Label(frm, image=photo_kumbhi, bg="grey8")
         frm.kumbhi_photo = photo_kumbhi
         frm.chars = tk.Button(frm, text="Characters", command=owned_chars, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
-        frm.add = tk.Button(frm, text="Manage", command=add_item, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
+        frm.add = tk.Button(frm, text="Manage", command=manage_characters, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
         frm.search = tk.Button(frm, text="Search Chars", command=search_menu, bg="#333", fg="white", width=15, relief=tk.RAISED, borderwidth=3)
 
 
@@ -100,15 +100,21 @@ def owned_chars():
         row = displayed_count // chars_per_row
         col = displayed_count % chars_per_row
 
-        if char["obtained"] == True:
-            img = ImageTk.PhotoImage(Image.open(char["image"]))
-            frm.photo_references.append(img)
+        if char.get('obtained', False) == True:
+            error_displayed = False
+            if not char.get("image") or char.get("image") and not os.path.isfile(char["image"]):
+                error = tk.Label(char_frame, text=f"{char.get('name')} \n Image \n Not Found", font=("Arial", 8), fg="white", bg="grey8", width=12)
+                error.grid(row=row, column=col, padx=4, pady=5)
+                error_displayed = True
+            if not error_displayed:
+                img = ImageTk.PhotoImage(Image.open(char["image"]))
+                frm.photo_references.append(img)
 
-            char_image = tk.Label(char_frame, image=img, bg="grey8")
-            char_image.bind("<Button-1>", lambda event, c=char: show_char_detail(c))
-            char_image.grid(row=row, column=col, padx=5, pady=5)
+                char_image = tk.Label(char_frame, image=img, bg="grey8")
+                char_image.bind("<Button-1>", lambda event, c=char: show_char_detail(c))
+                char_image.grid(row=row, column=col, padx=5, pady=5)
 
-            frm.char_labels[displayed_count] = {"label": char_image, "char": char}
+                frm.char_labels[displayed_count] = {"label": char_image, "char": char}
 
             displayed_count += 1
 
@@ -119,7 +125,7 @@ def owned_chars():
     filter_ele()
        
 
-def add_item():
+def manage_characters():
     screen_utils.clear()
     screen_utils.page_title("Manage Characters")
     
@@ -144,26 +150,34 @@ def add_item():
     for i, char in enumerate(characters):
         row = i // chars_per_row
         col = i % chars_per_row
+
+        error_displayed = False
+        if not char.get("image") or char.get("image") and not os.path.isfile(char["image"]):
+            error = tk.Label(char_frame, text="Character Not \n Found", font=("Arial", 8), fg="white", bg="grey8", width=12)
+            error.grid(row=row, column=col, padx=4, pady=5)
+            error_displayed = True
+
+        if not error_displayed:
         
-        orig_img = Image.open(char["image"])
-        grey_img = ImageOps.grayscale(orig_img)
-        grey_img = ImageOps.colorize(grey_img, black="black", white="grey")                     
-        img = ImageTk.PhotoImage(orig_img)
-        grey_photo = ImageTk.PhotoImage(grey_img)
-        frm.photo_references.append(img)
-        frm.photo_references.append(grey_photo)
+            orig_img = Image.open(char["image"])
+            grey_img = ImageOps.grayscale(orig_img)
+            grey_img = ImageOps.colorize(grey_img, black="black", white="grey")                     
+            img = ImageTk.PhotoImage(orig_img)
+            grey_photo = ImageTk.PhotoImage(grey_img)
+            frm.photo_references.append(img)
+            frm.photo_references.append(grey_photo)
 
-        if char['obtained'] == True:
-             current_img = img
-        else:
-             current_img = grey_photo
+            if char['obtained'] == True:
+                current_img = img
+            else:
+                current_img = grey_photo
 
-        checkbox_var = tk.BooleanVar(value=char.get("obtained", False))
-        checkbox = tk.Button(char_frame, image=current_img, bg="grey8")
-        checkbox.configure(command=lambda i=i, var=checkbox_var, btn=checkbox, img=img, grey_img=grey_photo: update_character(i, var, btn, img, grey_img))
-        checkbox.grid(row=row, column=col, padx=4, pady=5)
+            checkbox_var = tk.BooleanVar(value=char.get("obtained", False))
+            checkbox = tk.Button(char_frame, image=current_img, bg="grey8")
+            checkbox.configure(command=lambda i=i, var=checkbox_var, btn=checkbox, img=img, grey_img=grey_photo: update_character(i, var, btn, img, grey_img))
+            checkbox.grid(row=row, column=col, padx=4, pady=5)
 
-        frm.char_labels[i] = {"label": checkbox, "char": char}
+            frm.char_labels[i] = {"label": checkbox, "char": char}
 
     def update_character(index, var, btn, img, grey_img):
         if btn.cget('image') == str(img):

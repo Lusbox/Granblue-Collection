@@ -6,7 +6,7 @@
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/AbbyF_pic.png",
     "race": "Human",
-    "obtained": true
+    "obtained": false
   },
   {
     "name": "Agielba",
@@ -96,7 +96,7 @@
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/AoidosF_pic.png",
     "race": "Human",
-    "obtained": true
+    "obtained": false
   },
   {
     "name": "Aqours Third-Years",
@@ -105,7 +105,7 @@
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/Aqours Third-YearsF_pic.png",
     "race": "Human",
-    "obtained": true
+    "obtained": false
   },
   {
     "name": "Athena",
