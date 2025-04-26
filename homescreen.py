@@ -1,5 +1,6 @@
 import tkinter as tk
 import json
+import os
 from PIL import Image, ImageTk, ImageOps
 
 
@@ -34,18 +35,18 @@ class ScreenUtils:
 
     def back_button(self, callback):
          back_button = tk.Button(self.frame, text="Back", command=callback, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
-         back_button.place(relx=0.55, rely=0.9, anchor='center')
+         back_button.place(relx=0.55, rely=0.95, anchor='center')
 
     def home_button(self):
         home_buttom = tk.Button(self.frame, text="Home", command=homescreen, bg="#333", fg="white", width=8, relief=tk.RAISED, borderwidth=3)
-        home_buttom.place(relx=0.45, rely=0.9, anchor='center')
+        home_buttom.place(relx=0.45, rely=0.95, anchor='center')
 
     def page_title(self, text):
          title = tk.Label(frm, text=text, font=("Arial", 14), fg="white", bg="grey8")
          title.place(relx=0.5, rely=0.05, anchor='center')
-    
-  
+      
 screen_utils = ScreenUtils(frm)
+
 
 def initialize_widgets(frm):
     if not hasattr(frm, 'widgets_initialized') or not frm.widgets_initialized:
@@ -74,8 +75,16 @@ def owned_chars():
     screen_utils.clear()
     screen_utils.page_title("Character List")
 
+    canvas = tk.Canvas(frm, bg="grey8")
+    scrollbar = tk.Scrollbar(frm, orient="vertical", command=canvas.yview)
+
+    canvas.place(relx=0.5, rely=0.2, anchor='n', relwidth=0.9, relheight=0.7)
+    scrollbar.place(relx=0.95, rely=0.2, anchor='n', relheight=0.7)
+
+    canvas.configure(yscrollcommand=scrollbar.set)
+
     char_frame = tk.Frame(frm, bg="grey8")
-    char_frame.place(relx=0.05, rely=0.25)
+    canvas.create_window((0, 0), window=char_frame, anchor="nw")
 
     screen_utils.back_button(homescreen)
     details = tk.Label(frm, text="click portrait for character details", font=("Arial", 10), fg="white", bg="grey8")
@@ -84,11 +93,12 @@ def owned_chars():
     frm.photo_references = []
     frm.char_labels = {}
 
-    chars_per_row = 5
+    chars_per_row = 10
+    displayed_count = 0
 
     for i, char in enumerate(characters):
-        row = i // chars_per_row
-        col = i % chars_per_row
+        row = displayed_count // chars_per_row
+        col = displayed_count % chars_per_row
 
         if char["obtained"] == True:
             img = ImageTk.PhotoImage(Image.open(char["image"]))
@@ -98,7 +108,13 @@ def owned_chars():
             char_image.bind("<Button-1>", lambda event, c=char: show_char_detail(c))
             char_image.grid(row=row, column=col, padx=5, pady=5)
 
-            frm.char_labels[i] = {"label": char_image, "char": char}
+            frm.char_labels[displayed_count] = {"label": char_image, "char": char}
+
+            displayed_count += 1
+
+    char_frame.update_idletasks()
+    canvas.config(scrollregion=canvas.bbox("all"))
+    canvas.bind_all("<MouseWheel>", lambda event: canvas.yview_scroll(int(-1*(event.delta/120)), "units"))
 
     filter_ele()
        
@@ -107,15 +123,23 @@ def add_item():
     screen_utils.clear()
     screen_utils.page_title("Manage Characters")
     
+    canvas = tk.Canvas(frm, bg="grey8")
+    scrollbar = tk.Scrollbar(frm, orient="vertical", command=canvas.yview)
+
+    canvas.place(relx=0.5, rely=0.2, anchor='n', relwidth=0.91, relheight=0.7)
+    scrollbar.place(relx=0.96, rely=0.2, anchor='n', relheight=0.7)
+
+    canvas.configure(yscrollcommand=scrollbar.set)
+
     char_frame = tk.Frame(frm, bg="grey8")
-    char_frame.place(relx=0.05, rely=0.25)
+    canvas.create_window((0, 0), window=char_frame, anchor="nw")
 
     screen_utils.back_button(homescreen)
 
     frm.photo_references = []
     frm.char_labels = {}
 
-    chars_per_row = 5
+    chars_per_row = 10
     
     for i, char in enumerate(characters):
         row = i // chars_per_row
@@ -137,7 +161,7 @@ def add_item():
         checkbox_var = tk.BooleanVar(value=char.get("obtained", False))
         checkbox = tk.Button(char_frame, image=current_img, bg="grey8")
         checkbox.configure(command=lambda i=i, var=checkbox_var, btn=checkbox, img=img, grey_img=grey_photo: update_character(i, var, btn, img, grey_img))
-        checkbox.grid(row=row, column=col, padx=5, pady=5)
+        checkbox.grid(row=row, column=col, padx=4, pady=5)
 
         frm.char_labels[i] = {"label": checkbox, "char": char}
 
@@ -152,6 +176,10 @@ def add_item():
         characters[index]["obtained"] = var.get()
         with open('data/characters.json', 'w') as file:
             json.dump(characters, file, indent=2)
+
+    char_frame.update_idletasks()
+    canvas.config(scrollregion=canvas.bbox("all"))
+    canvas.bind_all("<MouseWheel>", lambda event: canvas.yview_scroll(int(-1*(event.delta/120)), "units"))
 
     filter_ele()
 
@@ -226,17 +254,17 @@ def filter_ele():
     def filter_by_element():
             selected_filter = []
             if fire_var.get():
-                selected_filter.append('fire')
+                selected_filter.append('Fire')
             if water_var.get():
-                    selected_filter.append('water')
+                    selected_filter.append('Water')
             if earth_var.get():
-                    selected_filter.append('earth')
+                    selected_filter.append('Earth')
             if wind_var.get():
-                    selected_filter.append('wind')
+                    selected_filter.append('Wind')
             if light_var.get():
-                    selected_filter.append('light')
+                    selected_filter.append('Light')
             if dark_var.get():
-                    selected_filter.append('dark')
+                    selected_filter.append('Dark')
             if ssr_var.get():
                     selected_filter.append('SSR')
             if sr_var.get():
@@ -251,7 +279,7 @@ def filter_ele():
 
                     if not selected_filter:
                         char["label"].grid()
-                    elif any(ele in selected_filter for ele in ['fire', 'water', 'earth', 'wind', 'light', 'dark']) and \
+                    elif any(ele in selected_filter for ele in ['Fire', 'Water', 'Earth', 'Wind', 'Light', 'Dark']) and \
                         any(rar in selected_filter for rar in ['SSR', 'SR', 'R']):
                         if char_element in selected_filter and char_rarity in selected_filter:
                             char["label"].grid()
@@ -280,12 +308,12 @@ def filter_ele():
     filter_frame = tk.Frame(frm, bg="grey8")
     filter_frame.place(relx=0.3, rely=0.08)
 
-    fire = tk.Checkbutton(filter_frame, text="Fire", command=filter_by_element, width=4, variable=fire_var, onvalue='fire', offvalue='')
-    water = tk.Checkbutton(filter_frame, text="Water", command=filter_by_element, width=4, variable=water_var, onvalue='water', offvalue='')
-    earth = tk.Checkbutton(filter_frame, text="Earth", command=filter_by_element, width=4, variable=earth_var, onvalue='earth', offvalue='')
-    wind = tk.Checkbutton(filter_frame, text="Wind", command=filter_by_element, width=4, variable=wind_var, onvalue='wind', offvalue='')
-    light = tk.Checkbutton(filter_frame, text="Light", command=filter_by_element, width=4, variable=light_var, onvalue='light', offvalue='')
-    dark = tk.Checkbutton(filter_frame, text="Dark", command=filter_by_element, width=4, variable=dark_var, onvalue='dark', offvalue='')
+    fire = tk.Checkbutton(filter_frame, text="Fire", command=filter_by_element, width=4, variable=fire_var, onvalue='Fire', offvalue='')
+    water = tk.Checkbutton(filter_frame, text="Water", command=filter_by_element, width=4, variable=water_var, onvalue='Water', offvalue='')
+    earth = tk.Checkbutton(filter_frame, text="Earth", command=filter_by_element, width=4, variable=earth_var, onvalue='Earth', offvalue='')
+    wind = tk.Checkbutton(filter_frame, text="Wind", command=filter_by_element, width=4, variable=wind_var, onvalue='Wind', offvalue='')
+    light = tk.Checkbutton(filter_frame, text="Light", command=filter_by_element, width=4, variable=light_var, onvalue='Light', offvalue='')
+    dark = tk.Checkbutton(filter_frame, text="Dark", command=filter_by_element, width=4, variable=dark_var, onvalue='Dark', offvalue='')
     ssr = tk.Checkbutton(filter_frame, text="SSR", command=filter_by_element, width=4, variable=ssr_var, onvalue='SSR', offvalue='')
     sr = tk.Checkbutton(filter_frame, text="SR", command=filter_by_element, width=4, variable=sr_var, onvalue='SR', offvalue='')
     r = tk.Checkbutton(filter_frame, text="R", command=filter_by_element, width=4, variable=r_var, onvalue='R', offvalue='')
@@ -307,33 +335,50 @@ def filter_ele():
 
 def show_char_detail(character):
     screen_utils.clear()
+    error_displayed = False
+    if not character.get("big_pic") or character.get("big_pic") and not os.path.isfile(character["big_pic"]):
+         error_displayed = display_error_img()
     
-    big_pic = character["big_pic"]
-    char_image = Image.open(big_pic)
-    char_photo = ImageTk.PhotoImage(char_image)
-    char_pic = tk.Label(frm, image=char_photo, bg="grey8")
+    if not error_displayed:
+        try:
+            big_pic = character["big_pic"]
+            char_image = Image.open(big_pic)
+            char_photo = ImageTk.PhotoImage(char_image)
+            char_pic = tk.Label(frm, image=char_photo, bg="grey8")
+            char_pic.place(relx=0.58, rely=0.6, anchor='center')
+            frm.char_pic = char_photo
+        except FileNotFoundError:
+            display_error_img()
 
     char_details_frame = tk.LabelFrame(frm, relief=tk.RAISED, bg="grey8", fg="white")
     char_details_frame.place(relx=0.03, rely=0.25)
 
-    char_name = tk.Label(char_details_frame, text=f"Name:   {character["name"]}", font=("Arial", 12), fg="white", bg="grey8")
+    char_name = tk.Label(char_details_frame, text=f"Name:   {character.get('name', 'Unknown')}", font=("Arial", 12), fg="white", bg="grey8")
     char_name.grid(row=0, column=0, padx=5, pady=5, sticky='w')
 
-    char_rarity = tk.Label(char_details_frame, text=f"Rarity:   {character["rarity"]}", font=("Arial", 12), fg="white", bg="grey8")
+    char_rarity = tk.Label(char_details_frame, text=f"Rarity:   {character.get('rarity', 'Unknown')}", font=("Arial", 12), fg="white", bg="grey8")
     char_rarity.grid(row=1, column=0, padx=5, pady=5, sticky='w')
 
-    char_element = tk.Label(char_details_frame, text=f"Element:   {character["element"].capitalize()}", font=("Arial", 12), fg="white", bg="grey8")
+    char_element = tk.Label(char_details_frame, text=f"Element:   {character.get('element', 'Unknown')}", font=("Arial", 12), fg="white", bg="grey8")
     char_element.grid(row=2, column=0, padx=5, pady=5, sticky='w')
+    
+    char_race = tk.Label(char_details_frame, text=f"Race:   {character.get('race', 'Unknown')}", font=("Arial", 12), fg="white", bg="grey8")
+    char_race.grid(row=3, column=0, padx=5, pady=5, sticky='w')
 
     char_owned = tk.Label(char_details_frame, text=f"Owned:   {"Yes" if character["obtained"] else "No"}", font=("Arial", 12), fg="white", bg="grey8")
-    char_owned.grid(row=3, column=0, padx=5, pady=5, sticky='w')
-
-    frm.char_pic = char_photo
-
-    char_pic.place(relx=0.58, rely=0.6, anchor='center')
+    char_owned.grid(row=4, column=0, padx=5, pady=5, sticky='w')
 
     screen_utils.back_button(owned_chars)
     screen_utils.home_button()
+
+
+def display_error_img():
+    error_img = Image.open("assets/misc/error.png")
+    error_photo = ImageTk.PhotoImage(error_img)
+    error = tk.Label(frm, image=error_photo, bg="grey8")
+    error.place(relx=0.5, rely=0.5, anchor='center')
+    frm.error = error_photo
+    return True
 
 
 if __name__ == "__main__":

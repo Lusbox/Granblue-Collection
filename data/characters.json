@@ -1,26 +1,182 @@
 [
   {
     "name": "Abby",
-    "image": "assets/characters/Abby.jpg",
-    "element": "fire",
+    "image": "assets/characters/fire/AbbyF.jpg",
+    "element": "Fire",
     "rarity": "SSR",
-    "big_pic": "assets/characters/Abby_pic.png",
-    "obtained": false
+    "big_pic": "assets/characters/fire/AbbyF_pic.png",
+    "race": "Human",
+    "obtained": true
   },
   {
     "name": "Agielba",
-    "image": "assets/characters/Agielba.jpg",
-    "element": "fire",
+    "image": "assets/characters/fire/AgielbaF.jpg",
+    "element": "Fire",
     "rarity": "SSR",
-    "big_pic": "assets/characters/Agielba_pic.png",
-    "obtained": false
+    "big_pic": "assets/characters/fire/AgielbaF_pic.png",
+    "race": "Draph",
+    "obtained": true
   },
   {
     "name": "Aglovale",
-    "image": "assets/characters/Aglovale.jpg",
-    "element": "water",
+    "image": "assets/characters/fire/AglovaleF.jpg",
+    "element": "Fire",
     "rarity": "SSR",
-    "big_pic": "assets/characters/Aglovale_pic.png",
+    "big_pic": "assets/characters/fire/AglovaleF_pic.png",
+    "race": "Human",
     "obtained": false
+  },
+  {
+    "name": "Alanaan",
+    "image": "assets/characters/fire/AlanaanF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/AlanaanF_pic.png",
+    "race": "Erune",
+    "obtained": false
+  },
+  {
+    "name": "Aliza",
+    "image": "assets/characters/fire/AlizaF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/AlizaF_pic.png",
+    "race": "Draph",
+    "obtained": true
+  },
+  {
+    "name": "Altair",
+    "image": "assets/characters/fire/AltairF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/AltairF_pic.png",
+    "race": "Human",
+    "obtained": true
+  },
+  {
+    "name": "Anderson",
+    "image": "assets/characters/fire/AndersonF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/AndersonF_pic.png",
+    "race": "Human",
+    "obtained": false
+  },
+  {
+    "name": "Anila",
+    "image": "assets/characters/fire/AnilaF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/AnilaF_pic.png",
+    "race": "Draph",
+    "obtained": true
+  },
+  {
+    "name": "Anna",
+    "image": "assets/characters/fire/AnnaF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/AnnaF_pic.png",
+    "race": "Human",
+    "obtained": false
+  },
+  {
+    "name": "Anthuria",
+    "image": "assets/characters/fire/AnthuriaF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/AnthuriaF_pic.png",
+    "race": "Erune",
+    "obtained": true
+  },
+  {
+    "name": "Aoidos",
+    "image": "assets/characters/fire/AoidosF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/AoidosF_pic.png",
+    "race": "Human",
+    "obtained": true
+  },
+  {
+    "name": "Aqours Third-Years",
+    "image": "assets/characters/fire/Aqours Third-YearsF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/Aqours Third-YearsF_pic.png",
+    "race": "Human",
+    "obtained": true
+  },
+  {
+    "name": "Athena",
+    "image": "assets/characters/fire/AthenaF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/AthenaF_pic.png",
+    "race": "Primal",
+    "obtained": false
+  },
+  {
+    "name": "Azazel",
+    "image": "assets/characters/fire/AzazelF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/AzazelF_pic.png",
+    "race": "Primal",
+    "obtained": true
+  },
+  {
+    "name": "Baal",
+    "image": "assets/characters/fire/BaalF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/BaalF_pic.png",
+    "race": "Primal",
+    "obtained": true
+  },
+  {
+    "name": "Barawa and sarya",
+    "image": "assets/characters/fire/Barawa and SaryaF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/Barawa and SaryaF_pic.png",
+    "race": "Draph",
+    "obtained": true
+  },
+  {
+    "name": "Beatrix",
+    "image": "assets/characters/fire/BeatrixF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/BeatrixF_pic.png",
+    "race": "Human",
+    "obtained": false
+  },
+  {
+    "name": "Cain",
+    "image": "assets/characters/fire/CainF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/CainF_pic.png",
+    "race": "Human",
+    "obtained": true
+  },
+  {
+    "name": "Charioce XVII",
+    "image": "assets/characters/fire/Charioce XVIIF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/Charioce XVIIF_pic.png",
+    "race": "Human",
+    "obtained": false
+  },
+  {
+    "name": "Chichiri",
+    "image": "assets/characters/fire/ChichiriF.jpg",
+    "element": "Fire",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/fire/ChichiriF_pic.png",
+    "race": "Draph",
+    "obtained": true
   }
 ]
