@@ -381,7 +381,7 @@ def show_char_detail(character):
     char_race = tk.Label(char_details_frame, text=f"Race:   {character.get('race', 'Unknown')}", font=("Arial", 12), fg="white", bg="grey8")
     char_race.grid(row=3, column=0, padx=5, pady=5, sticky='w')
 
-    char_owned = tk.Label(char_details_frame, text=f"Owned:   {"Yes" if character["obtained"] else "No"}", font=("Arial", 12), fg="white", bg="grey8")
+    char_owned = tk.Label(char_details_frame, text=f"Owned:   {'Yes' if character['obtained'] else 'No'}", font=("Arial", 12), fg="white", bg="grey8")
     char_owned.grid(row=4, column=0, padx=5, pady=5, sticky='w')
 
     screen_utils.back_button(owned_chars)

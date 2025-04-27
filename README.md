@@ -19,4 +19,4 @@ Install required packages:
 pip install -r requirements.txt
 
 Run file:
-python3 collections.py
+python3 collection.py
