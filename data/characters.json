@@ -6,11 +6,11 @@
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/AbbyF_pic.png",
     "race": "Human",
-    "obtained": false
+    "obtained": true
   },
   {
     "name": "Agielba",
-    "image": "assets/characters/fire/AgielbaF.jpg",
+    "image": "assets/characters/fire/Agielba.jpg",
     "element": "Fire",
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/AgielbaF_pic.png",
@@ -20,11 +20,11 @@
   {
     "name": "Aglovale",
     "image": "assets/characters/fire/AglovaleF.jpg",
-    "element": "Fire",
+    
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/AglovaleF_pic.png",
     "race": "Human",
-    "obtained": false
+    "obtained": true
   },
   {
     "name": "Alanaan",
@@ -33,7 +33,7 @@
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/AlanaanF_pic.png",
     "race": "Erune",
-    "obtained": false
+    "obtained": true
   },
   {
     "name": "Aliza",
@@ -60,7 +60,7 @@
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/AndersonF_pic.png",
     "race": "Human",
-    "obtained": false
+    "obtained": true
   },
   {
     "name": "Anila",
@@ -78,7 +78,7 @@
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/AnnaF_pic.png",
     "race": "Human",
-    "obtained": false
+    "obtained": true
   },
   {
     "name": "Anthuria",
@@ -96,7 +96,7 @@
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/AoidosF_pic.png",
     "race": "Human",
-    "obtained": false
+    "obtained": true
   },
   {
     "name": "Aqours Third-Years",
@@ -105,7 +105,7 @@
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/Aqours Third-YearsF_pic.png",
     "race": "Human",
-    "obtained": false
+    "obtained": true
   },
   {
     "name": "Athena",
@@ -114,7 +114,7 @@
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/AthenaF_pic.png",
     "race": "Primal",
-    "obtained": false
+    "obtained": true
   },
   {
     "name": "Azazel",
@@ -150,7 +150,7 @@
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/BeatrixF_pic.png",
     "race": "Human",
-    "obtained": false
+    "obtained": true
   },
   {
     "name": "Cain",
@@ -168,7 +168,7 @@
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/Charioce XVIIF_pic.png",
     "race": "Human",
-    "obtained": false
+    "obtained": true
   },
   {
     "name": "Chichiri",
@@ -177,6 +177,51 @@
     "rarity": "SSR",
     "big_pic": "assets/characters/fire/ChichiriF_pic.png",
     "race": "Draph",
+    "obtained": true
+  },
+  {
+    "name": "Aglovale",
+    "image": "assets/characters/water/AglovaleW.jpg",
+    "element": "Water",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/water/AglovaleW_pic.png",
+    "race": "Human",
+    "obtained": true
+  },
+  {
+    "name": "Adam",
+    "image": "assets/characters/earth/AdamE.jpg",
+    "element": "Earth",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/earth/AdamE_pic.png",
+    "race": "Other",
+    "obtained": true
+  },
+  {
+    "name": "Albert",
+    "image": "assets/characters/wind/AlbertW.jpg",
+    "element": "Wind",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/wind/AlbertW_pic.png",
+    "race": "Human",
+    "obtained": true
+  },
+  {
+    "name": "Aglovale",
+    "image": "assets/characters/light/AglovaleL.jpg",
+    "element": "Light",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/light/AglovaleL_pic.png",
+    "race": "Human",
+    "obtained": true
+  },
+  {
+    "name": "Albert",
+    "image": "assets/characters/dark/AlbertD.jpg",
+    "element": "Dark",
+    "rarity": "SSR",
+    "big_pic": "assets/characters/dark/AlbertD_pic.png",
+    "race": "Human",
     "obtained": true
   }
 ]
